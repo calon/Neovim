@@ -985,25 +985,45 @@ let g:voom_python_versions = [3,2]
 
 " Wiki.vim "{{{2
 
+let g:wiki_link_creation = {
+        \ 'md': {
+        \   'link_type': 'md',
+        \   'url_extension': '',
+        \ },
+        \ 'org': {
+        \   'link_type': 'org',
+        \   'url_extension': '.org',
+        \ },
+        \ 'adoc': {
+        \   'link_type': 'adoc_xref_bracket',
+        \   'url_extension': '',
+        \ },
+        \ '_': {
+        \   'link_type': 'wiki',
+        \   'url_extension': '',
+        \ },
+        \}
+
 " nmap <C-Enter> <plug>(wiki-link-follow)
 " vmap <C-Enter> <plug>(wiki-link-follow)
 " nmap <Space>d <plug>(wiki-journal)
 "
-" let g:wiki_root = "c:/Data/OneDrive/Note/Inbox"
+let g:wiki_root = "c:/Data/OneDrive/Note/Inbox"
 " let g:wiki_filetypes = ['markdown', 'wiki']
 " let g:wiki_link_extension = '.md'
 " let g:wiki_link_target_type = 'md'
 " let g:wiki_write_on_nav = 1
 "
-" let g:wiki_journal = {
-"     \ 'name': 'diary',
-"     \ 'frequency': 'daily',
-"     \ 'date_format': {
-"     \   'daily' : '%Y%m%d',
-"     \ },
-"     \ 'index_use_journal_scheme': v:true,
-"     \}
-"
+let g:wiki_journal = {
+    \ 'name': 'diary',
+    \ 'root': 'c:/Data/OneDrive/Note/Inbox/diary',
+    \ 'frequency': 'daily',
+    \ 'date_format': {
+    \   'daily' : '%Y-%m-%d',
+    \ },
+    \ 'index_use_journal_scheme': v:true,
+    \}
+
 " augroup init_calendar
 "     autocmd!
 "     autocmd FileType calendar
