@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.sqlite_clib_path = "C:\\Users\\Calon\\AppData\\Local\\nvim\\sqlite\\sqlite3.dll"
+-- vim.g.sqlite_clib_path = "C:\\Users\\Calon\\AppData\\Local\\nvim\\sqlite\\sqlite3.dll"
 
 require("lazy").setup({
 
@@ -84,7 +84,8 @@ require("lazy").setup({
     "drmikehenry/vim-fontsize",
     "mbbill/undotree",
     "vim-scripts/FavEx",
-    "el-iot/buffer-tree",
+    "AndrewRadev/simple_bookmarks.vim",
+    -- "el-iot/buffer-tree",
 
     -- 配色和外观
     { "joshdick/onedark.vim",
@@ -115,6 +116,9 @@ require("lazy").setup({
     "lilydjwg/colorizer",
     "calon/txt",
     "luochen1990/rainbow",
+
+    -- 缩进
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
     -- 文本对象
     "coderifous/textobj-word-column.vim",

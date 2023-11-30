@@ -24,8 +24,6 @@ autocmd BufEnter * silent! lcd %:p:h "自动切换工作目录
 " nmap <S-Enter> <Plug>VimwikiVSplitLink
 " vmap <S-Enter> <Plug>VimwikiVSplitLink
 
-lua require('plugins')
-
 set termguicolors
 " set guifont="更纱黑体 Mono SC Nerd":h14
 set guifont=霞鹜文楷等宽:h20
@@ -355,7 +353,7 @@ inoremap <A-F10> <Esc>:Bdelete<CR>
 " F12 for LeaderF
 
 " BufferList
-map <silent> <F12> :call BufferList()<CR>
+" map <silent> <F12> :call BufferList()<CR>
 
 " BufferTabLine
 map <silent> <C-F12> :call ToggleBufTabLine()<CR>
@@ -462,6 +460,7 @@ nnoremap <BackSpace><BackSpace> <C-U>
 " 折叠 "{{{2
 
 " nnoremap ss za
+nnoremap <Space> za
 set foldenable " 开始折叠
 set foldmethod=marker " 设置语法折叠
 setlocal foldlevel=1 " 设置折叠层数
@@ -833,6 +832,111 @@ nnoremap <C-P> :Telescope oldfiles<CR>
 let g:bookmark_sign = '>>'
 let g:bookmark_annotation_sign = '##'
 
+" Vim-Markdown "{{{2
+
+let g:vim_markdown_no_extensions_in_markdown = 1
+
+" Vim-WordMotion "{{{2
+
+let g:wordmotion_spaces = ['。', '，', '！', '？', '：', '；', '”', '“', '‘', '’', '（', '）', '《', '》', '、', '…', '·', '—', '【', '】']
+
+" VimWiki "{{{2
+
+" let g:vimwiki_auto_chdir = 0
+" let g:vimwiki_list_ignore_newline = 0
+" let g:vimwiki_conceallevel = 0
+" let g:vimwiki_conceal_onechar_markers = 0
+" let g:vimwiki_key_mappings =
+"     \ {
+"     \ 'table_mappings': 0,
+"     \ }
+"
+" nmap <C-Enter> <Plug>VimwikiFollowLink
+" vmap <C-Enter> <Plug>VimwikiFollowLink
+" noremap <Space>d <cmd>VimwikiMakeDiaryNote 1<cr>
+
+" Voom  "{{{2
+noremap <F11> <Esc>:VoomToggle markdown<CR>
+noremap <S-F11> <Esc>:VoomToggle indents<CR>
+noremap <C-F11> <Esc>:VoomToggle<CR>
+let g:voom_python_versions = [3,2]
+let g:voom_return_key = "<C-Enter>"
+" let g:voom_tab_key = "<C-Tab>"
+
+" Wiki.vim "{{{2
+
+let g:wiki_filetypes = ['md', 'todo', 'txt']
+
+let g:wiki_link_creation = {
+        \ 'md': {
+        \   'link_type': 'md',
+        \   'url_extension': '',
+        \ },
+        \ 'org': {
+        \   'link_type': 'org',
+        \   'url_extension': '.org',
+        \ },
+        \ 'adoc': {
+        \   'link_type': 'adoc_xref_bracket',
+        \   'url_extension': '',
+        \ },
+        \ '_': {
+        \   'link_type': 'md',
+        \   'url_extension': '',
+        \ },
+        \}
+
+" nmap <C-Enter> <plug>(wiki-link-follow)
+" vmap <C-Enter> <plug>(wiki-link-follow)
+" nmap <Space>d <plug>(wiki-journal)
+"
+let g:wiki_root = "c:/Data/OneDrive/Note/Inbox"
+" let g:wiki_link_extension = '.md'
+" let g:wiki_link_target_type = 'md'
+" let g:wiki_write_on_nav = 1
+"
+let g:wiki_journal = {
+    \ 'name': 'diary',
+    \ 'root': 'c:/Data/OneDrive/Note/Inbox/diary',
+    \ 'frequency': 'daily',
+    \ 'date_format': {
+    \   'daily' : '%Y-%m-%d',
+    \ },
+    \ 'index_use_journal_scheme': v:true,
+    \}
+
+" augroup init_calendar
+"     autocmd!
+"     autocmd FileType calendar
+"             \ nnoremap <silent><buffer> <cr>
+"             \ :<c-u>call wiki#journal#open()<cr>
+" augroup END
+
+" Comment "{{{2
+
+" lua require('Comment').setup()
+
+" Hop "{{{2
+
+" lua << EOF
+" require'hop'.setup( {keys = 'jetovxqpdygfblzhckisuranmw'} )
+"     local hop = require('hop')
+"     vim.keymap.set('', '<ESC><ESC>', function()
+"         hop.hint_anywhere({ multi_windows = true })
+"     end, {remap=true})
+" EOF
+
+
+" Marksman "{{{2
+
+" lua require'lspconfig'.marksman.setup{}
+
+" Nvim-Notify "{{{2
+
+" lua vim.notify = require("notify")
+
+lua require('plugins')
+
 " Vim-QuickUI "{{{2
 
 " clear all the menus
@@ -842,10 +946,16 @@ call quickui#menu#install('&File', [
             \ [ "查看历史文件\tCtrl+P", '' ],
             \ [ "加入收藏\t:FF", 'FF' ],
             \ [ "打开收藏\t:FE", 'FE' ],
-            \ [ "打开缓冲区清单\t<F12>", '' ],
-            \ [ "打开缓冲区树状目录\t:BufferTree", 'BufferTree' ],
+            \ [ "打开缓冲区清单\t<F12>", 'Telescope buffers' ],
             \ [ "转换为网页文件\t:TOhtml", 'TOhtml' ],
             \ [ "切换工作目录到当前文件\t:cd %:h", 'cd %:h' ],
+            \ ])
+
+call quickui#menu#install('&Bookmark', [
+            \ [ "打开书签清单\t:BookmarkQF", 'BookmarkQf' ],
+            \ [ "加入书签\t:BookmarkAdd name", 'BookmarkAdd ' ],
+            \ [ "打开书签\t:BookmarkGo name", 'BookmarkGo ' ],
+            \ [ "删除书签\t:BookmarkDel name", 'BookmarkDel ' ],
             \ ])
 
 call quickui#menu#install('&View', [
@@ -862,7 +972,6 @@ call quickui#menu#install('&View', [
             \ [ "打开 TagList\t<Ctrl-F8>", 'TagbarToggle' ],
             \ [ "切换大纲视图（Markdown）\t<F11>", 'VoomToggle markdown' ],
             \ [ "切换大纲视图\t<Ctrl-F11>", 'VoomToggle' ],
-            \ [ "切换缩进标志显示\t:IndentLinesToggle", 'IndentLinesToggle' ],
             \ [ "标记当前词\t<Leader>m", 'call mark#MarkCurrentWord()<CR>' ],
             \ ])
 
@@ -873,7 +982,6 @@ call quickui#menu#install('&Edit', [
             \ [ "删除 HTML 的标签部分\t:%s#<[^>]\+>##g", '%s#<[^>]\+>##g' ],
             \ [ "生成 Markdown ToC（GFM）\t:GenTocGFM", 'GenTocGFM' ],
             \ [ "创建折叠标记\t<Leader>f", 'echo "<Leader>ff表示子级折叠，<Leader>fc表示在注释中标记折叠"' ],
-            \ [ "Pathogen 更新插件帮助文档\t:Helptags", 'Helptags' ],
             \ [ "转换为 GB2312 编码\t:set fileencoding=cp936", 'set fileencoding=cp936' ],
             \ [ "转换为 UTF-8 编码\t:set fileencoding=utf-8", 'set fileencoding=utf-8' ],
             \ [ "跳回最后编辑的位置\t`.", 'exe "normal! `."' ],
@@ -883,16 +991,14 @@ call quickui#menu#install('&Edit', [
             \ ])
 
 call quickui#menu#install('&Moion or Find', [
-            \ [ "全屏定位跳转\t<Esc><Esc>", 'HopAnywhereMW' ],
+            \ [ "全屏定位跳转\t<Shift-H>", 'HopAnywhereMW' ],
             \ [ "汉字定位跳转\tSpace-S", '' ],
-            \ [ "模糊查找当前缓冲区内容\tCtrl-F", 'Telescope current_buffer_fuzzy_find' ],
             \ [ "模糊查找当前缓冲区内容\tCtrl-F", 'Telescope current_buffer_fuzzy_find' ],
             \ [ "模糊查找文件内容\tAlt-F7", '' ],
             \ ])
 
 call quickui#menu#install('&Display', [
             \ [ "调整字体大小\t<Leader><Leader>+/-" ],
-            \ [ "窄行模式\tF8", '' ],
             \ [ "聚焦部分段落高亮", 'Limelight!!' ],
             \ ])
 
@@ -955,105 +1061,6 @@ call quickui#menu#install('&Window', [
 let g:quickui_show_tip = 1
 
 noremap <F9> :call quickui#menu#open()<cr>
-
-" Vim-WordMotion "{{{2
-
-let g:wordmotion_spaces = ['。', '，', '！', '？', '：', '；', '”', '“', '‘', '’', '（', '）', '《', '》', '、', '…', '·', '—', '【', '】']
-
-" VimWiki "{{{2
-
-" let g:vimwiki_auto_chdir = 0
-" let g:vimwiki_list_ignore_newline = 0
-" let g:vimwiki_conceallevel = 0
-" let g:vimwiki_conceal_onechar_markers = 0
-" let g:vimwiki_key_mappings =
-"     \ {
-"     \ 'table_mappings': 0,
-"     \ }
-"
-" nmap <C-Enter> <Plug>VimwikiFollowLink
-" vmap <C-Enter> <Plug>VimwikiFollowLink
-" noremap <Space>d <cmd>VimwikiMakeDiaryNote 1<cr>
-
-" Voom  "{{{2
-noremap <F11> <Esc>:VoomToggle markdown<CR>
-noremap <S-F11> <Esc>:VoomToggle indents<CR>
-noremap <C-F11> <Esc>:VoomToggle<CR>
-let g:voom_python_versions = [3,2]
-" let g:voom_return_key = "<C-Enter>"
-" let g:voom_tab_key = "<C-Tab>"
-
-" Wiki.vim "{{{2
-
-let g:wiki_link_creation = {
-        \ 'md': {
-        \   'link_type': 'md',
-        \   'url_extension': '',
-        \ },
-        \ 'org': {
-        \   'link_type': 'org',
-        \   'url_extension': '.org',
-        \ },
-        \ 'adoc': {
-        \   'link_type': 'adoc_xref_bracket',
-        \   'url_extension': '',
-        \ },
-        \ '_': {
-        \   'link_type': 'wiki',
-        \   'url_extension': '',
-        \ },
-        \}
-
-" nmap <C-Enter> <plug>(wiki-link-follow)
-" vmap <C-Enter> <plug>(wiki-link-follow)
-" nmap <Space>d <plug>(wiki-journal)
-"
-let g:wiki_root = "c:/Data/OneDrive/Note/Inbox"
-" let g:wiki_filetypes = ['markdown', 'wiki']
-" let g:wiki_link_extension = '.md'
-" let g:wiki_link_target_type = 'md'
-" let g:wiki_write_on_nav = 1
-"
-let g:wiki_journal = {
-    \ 'name': 'diary',
-    \ 'root': 'c:/Data/OneDrive/Note/Inbox/diary',
-    \ 'frequency': 'daily',
-    \ 'date_format': {
-    \   'daily' : '%Y-%m-%d',
-    \ },
-    \ 'index_use_journal_scheme': v:true,
-    \}
-
-" augroup init_calendar
-"     autocmd!
-"     autocmd FileType calendar
-"             \ nnoremap <silent><buffer> <cr>
-"             \ :<c-u>call wiki#journal#open()<cr>
-" augroup END
-
-" Comment "{{{2
-
-" lua require('Comment').setup()
-
-" Hop "{{{2
-
-" lua << EOF
-" require'hop'.setup( {keys = 'jetovxqpdygfblzhckisuranmw'} )
-"     local hop = require('hop')
-"     vim.keymap.set('', '<ESC><ESC>', function()
-"         hop.hint_anywhere({ multi_windows = true })
-"     end, {remap=true})
-" EOF
-
-
-" Marksman "{{{2
-
-" lua require'lspconfig'.marksman.setup{}
-
-" Nvim-Notify "{{{2
-
-" lua vim.notify = require("notify")
-
 
 " Modeline "{{{1
 " vim:foldmethod=marker:foldlevel=0
