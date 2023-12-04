@@ -36,7 +36,7 @@ require("lazy").setup({
     { "phaazon/hop.nvim",
         config = function()
             require'hop'.setup { keys = 'jetovxqpdygfblzhckisuranmw' }
-            vim.keymap.set('n', '<S-H>', function()
+            vim.keymap.set('n', 's', function()
                 require('hop').hint_patterns({multi_windows = true}, '..')
             end, {remap=true})
         end
@@ -48,6 +48,7 @@ require("lazy").setup({
 
     -- 外观
     "rcarriga/nvim-notify",
+    "stevearc/dressing.nvim",
 
     -- 快捷操作
     "KabbAmine/lazyList.vim",
@@ -118,7 +119,7 @@ require("lazy").setup({
     "luochen1990/rainbow",
 
     -- 缩进
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+    -- { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
     -- 文本对象
     "coderifous/textobj-word-column.vim",
@@ -128,6 +129,10 @@ require("lazy").setup({
 
     -- 窗口
     "calon/SimSoftWrap",
+    "nvim-focus/focus.nvim",
+
+    --折叠
+    -- "kevinhwang91/nvim-ufo",
 
     -- 文件类型
     "aklt/plantuml-syntax",
@@ -137,5 +142,16 @@ require("lazy").setup({
 
     -- 标记
     "jrosiek/vim-mark",
+
+    -- 浏览器协同
+    {
+        "glacambre/firenvim",
+        -- Lazy load firenvim
+        -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+        lazy = not vim.g.started_by_firenvim,
+        build = function()
+            vim.fn["firenvim#install"](0)
+        end
+    },
 })
 
