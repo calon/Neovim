@@ -35,7 +35,7 @@ require("lazy").setup({
     -- 移动跳转
     { "phaazon/hop.nvim",
         config = function()
-            require'hop'.setup { keys = 'jetovxqpdygfblzhckisuranmw' }
+            require('hop').setup { keys = 'jetovxqpdygfblzhckisuranmw' }
             vim.keymap.set('n', 's', function()
                 require('hop').hint_patterns({multi_windows = true}, '..')
             end, {remap=true})
@@ -129,7 +129,12 @@ require("lazy").setup({
 
     -- 窗口
     "calon/SimSoftWrap",
-    "nvim-focus/focus.nvim",
+    {"nvim-focus/focus.nvim",
+        version = "*",
+        config = function() 
+            require("focus").setup()
+        end
+    },
 
     --折叠
     -- "kevinhwang91/nvim-ufo",
@@ -144,6 +149,7 @@ require("lazy").setup({
     "jrosiek/vim-mark",
 
     -- 浏览器协同
+    -- "subnut/nvim-ghost.nvim",
     {
         "glacambre/firenvim",
         -- Lazy load firenvim
