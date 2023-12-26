@@ -18,7 +18,18 @@ require("lazy").setup({
     -- 基础
     "neovim/nvim-lspconfig",
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
+    { "nvim-telescope/telescope.nvim",
+        -- config = function()
+        --     require('telescope').setup {
+        --         defaults = {
+        --             file_ingore_patterns = {
+        --                 "firenvim"
+        --             }
+        --         }
+        --     }
+        -- end
+    },
+
     { "nvim-telescope/telescope-frecency.nvim", tag = "0.1.4",
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
@@ -51,7 +62,7 @@ require("lazy").setup({
     "stevearc/dressing.nvim",
 
     -- 快捷操作
-    "KabbAmine/lazyList.vim",
+    -- "KabbAmine/lazyList.vim",
     "tomtom/tcomment_vim",
     "junegunn/vim-easy-align",
     "Konfekt/FastFold",
@@ -86,6 +97,26 @@ require("lazy").setup({
     "mbbill/undotree",
     "vim-scripts/FavEx",
     "AndrewRadev/simple_bookmarks.vim",
+    {
+        "crusj/bookmarks.nvim",
+        branch = "main",
+        config = function()
+            require("bookmarks").setup(
+                {
+                    keymap = {
+                        toggle = "<Space>m", -- Toggle bookmarks(global keymap)
+                        -- add = "\\z", -- Add bookmarks(global keymap)
+                        -- jump = "<CR>", -- Jump from bookmarks(buf keymap)
+                        -- delete = "dd", -- Delete bookmarks(buf keymap)
+                        -- order = "<space><space>", -- Order bookmarks by frequency or updated_time(buf keymap)
+                        -- delete_on_virt = "\\dd", -- Delete bookmark at virt text line(global keymap)
+                        -- show_desc = "\\sd", -- show bookmark desc(global keymap)
+                    },
+                }
+            )
+            require("telescope").load_extension("bookmarks")
+        end
+    },
     -- "el-iot/buffer-tree",
 
     -- 配色和外观
@@ -145,19 +176,19 @@ require("lazy").setup({
     "preservim/vim-markdown",
     "freitass/todo.txt-vim",
 
-    -- 标记
+    -- 自定义彩色标记
     "jrosiek/vim-mark",
 
     -- 浏览器协同
     -- "subnut/nvim-ghost.nvim",
-    {
-        "glacambre/firenvim",
-        -- Lazy load firenvim
-        -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-        lazy = not vim.g.started_by_firenvim,
-        build = function()
-            vim.fn["firenvim#install"](0)
-        end
-    },
+    -- {
+    --     "glacambre/firenvim",
+    --     -- Lazy load firenvim
+    --     -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+    --     lazy = not vim.g.started_by_firenvim,
+    --     build = function()
+    --         vim.fn["firenvim#install"](0)
+    --     end
+    -- },
 })
 

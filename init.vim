@@ -308,6 +308,7 @@ set pastetoggle=<C-F5>
 
 " Neovim GUI 切换缓冲区
 nnoremap <C-6> <C-^>
+inoremap <C-6> <Esc><C-^>
 nnoremap <Space>b <C-^>
  
 " 启用/禁止折行
@@ -587,16 +588,16 @@ let g:no_html_tab_mapping = 'yes'
 
 " LazyList "{{{2
 
-let g:lazylist_maps = [
-			\ '<Space>l' ,
-			\ {
-				\ 'l' : '',
-				\ '-' : '- ',
-				\ '+' : '+ ',
-				\ '*' : '* ',
-				\ ')' : '%1%) ',
-			\ }
-		\]
+" let g:lazylist_maps = [
+" 			\ '<Space>l' ,
+" 			\ {
+" 				\ 'l' : '',
+" 				\ '-' : '- ',
+" 				\ '+' : '+ ',
+" 				\ '*' : '* ',
+" 				\ ')' : '%1%) ',
+" 			\ }
+" 		\]
 
 " IM-Select "{{{2
 
