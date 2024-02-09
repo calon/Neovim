@@ -60,6 +60,7 @@ require("lazy").setup({
     -- 外观
     "rcarriga/nvim-notify",
     "stevearc/dressing.nvim",
+    "nvim-tree/nvim-web-devicons",
 
     -- 快捷操作
     -- "KabbAmine/lazyList.vim",
@@ -97,9 +98,12 @@ require("lazy").setup({
     "mbbill/undotree",
     "vim-scripts/FavEx",
     "AndrewRadev/simple_bookmarks.vim",
-    {
-        "crusj/bookmarks.nvim",
+    { "crusj/bookmarks.nvim",
+        -- keys = {
+        --     { "<Leader><Leader>", mode = { "n" } },
+        -- },
         branch = "main",
+        dependencies = { "nvim-web-devicons" },
         config = function()
             require("bookmarks").setup(
                 {
@@ -178,6 +182,7 @@ require("lazy").setup({
 
     -- 自定义彩色标记
     "jrosiek/vim-mark",
+    "bpstahlman/txtfmt"
 
     -- 浏览器协同
     -- "subnut/nvim-ghost.nvim",

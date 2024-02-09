@@ -209,6 +209,23 @@ set clipboard^=unnamed,unnamedplus "与系统共剪贴板
 " 列块编辑选项 "{{{2
 set virtualedit+=block
 
+" 其他文档处理脚本 "{{{2
+
+" You can change external program path here
+let g:app_path = "c:\\Application\\candy\\candy.exe"
+
+function! Open_md_link()
+
+    " move cursor to markdown link position
+    execute "normal! vi(o\<Esc>"
+
+    " get the full path and invoke external program to open it
+    execute "!start" g:app_path expand('<cfile>:p', '\')
+
+endfunction
+
+nnoremap <silent> <Space>o :call Open_md_link()<CR>
+
 " 按键映射 "{{{1
 
 " 通用按键映射 "{{{2
@@ -796,6 +813,9 @@ endfunction
 "   " ---- custom maps
 " endif
 
+" Simple Bookmarks "{{{2
+
+let g:simple_bookmarks_use_pattern = 1
 
 " SmartColumnColors "{{{2
 " let g:smart_display_opts = { 'column' : 84 } 
@@ -823,11 +843,26 @@ nnoremap <Space>fg <cmd>Telescope live_grep<cr>
 nnoremap <F12> <cmd>Telescope buffers<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
 nnoremap <Space>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>h <cmd>Telescope help_tags<cr>
-nnoremap <Space>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>h <cmd>Telescope help_tags<cr>
+" nnoremap <Space>fh <cmd>Telescope help_tags<cr>
 nnoremap <A-P> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 nnoremap <C-P> :Telescope oldfiles<CR>
 " nnoremap <C-P> :Telescope frecency<CR>
+
+" Txtfmt "{{{2
+" 打开所有背景颜色
+let g:txtfmtBgcolormask = "11111111"
+let g:txtfmtColor{1} = '^\\%(k\\|bla\\%[ck]\\)$,c:Black,g:#303030'
+let g:txtfmtColor{2} = '^g\\%[reen]$,c:DarkGreen,g:#A1FF0A'
+let g:txtfmtColor{3} = '^r\\%[ed]$,c:DarkRed,g:#FF2222'
+let g:txtfmtColor{4} = '^y\\%[ellow]$,c:DarkYellow,g:#EEFF22'
+let g:txtfmtColor{5} = '^v\\%[iolet]$,g:#BE0AFF'
+let g:txtfmtColor{6} = '^b\\%[lue]$,c:DarkBlue,g:#147DF5'
+let g:txtfmtColor{7} = '^o\\%[range]$,g:#FF8700'
+let g:txtfmtColor{8} = '^c\\%[yan]$,c:DarkCyan,g:#0AEFFF'
+" let g:txtfmtColor{4} = '^t\\%[urquoise]$,c:DarkCyan,g:#0AEFFF'
+" let g:txtfmtColor{6} = '^p\\%[ink]$,c:DarkMagenta,g:#FFB3FF'
+" let g:txtfmtColor{8} = '^w\\%[hite]$,c:White,g:#EEEEEE'
 
 " Vim-Bookmark "{{{2
 let g:bookmark_sign = '>>'
@@ -953,6 +988,7 @@ call quickui#menu#install('&File', [
             \ ])
 
 call quickui#menu#install('&Bookmark', [
+            \ [ "打开书签\t:Telescope bookmarks", 'Telescope bookmarks' ],
             \ [ "打开书签清单\t:BookmarkQF", 'BookmarkQf' ],
             \ [ "加入书签\t:BookmarkAdd name", 'BookmarkAdd ' ],
             \ [ "打开书签\t:BookmarkGo name", 'BookmarkGo ' ],
@@ -992,15 +1028,24 @@ call quickui#menu#install('&Edit', [
             \ ])
 
 call quickui#menu#install('&Moion or Find', [
-            \ [ "全屏定位跳转\t<Shift-H>", 'HopAnywhereMW' ],
-            \ [ "汉字定位跳转\tSpace-S", '' ],
-            \ [ "模糊查找当前缓冲区内容\tCtrl-F", 'Telescope current_buffer_fuzzy_find' ],
-            \ [ "模糊查找文件内容\tAlt-F7", '' ],
+            \ [ "全屏定位跳转\ts", 'HopAnywhereMW' ],
+            \ [ "汉字定位跳转\t<Space-S>", '' ],
+            \ [ "模糊查找当前缓冲区内容\t<Ctrl-F>", 'Telescope current_buffer_fuzzy_find' ],
+            \ [ "模糊查找文件内容\t<Alt-F7>", '' ],
             \ ])
 
 call quickui#menu#install('&Display', [
             \ [ "调整字体大小\t<Leader><Leader>+/-" ],
             \ [ "聚焦部分段落高亮", 'Limelight!!' ],
+            \ ])
+
+call quickui#menu#install('&Format', [
+            \ [ "打开高亮语法\t", 'set ft+=.txtfmt' ],
+            \ [ "关闭高亮语法\t", 'set ft-=.txtfmt' ],
+            \ [ "加粗\t<Leader>h fb", '' ],
+            \ [ "下划线\t<Leader>h fu", '' ],
+            \ [ "标记背景色\t<Leader>h k kbgcryov-", '' ],
+            \ [ "标记前景色\t<Leader>h c kbgcryov-", '' ],
             \ ])
 
 " call quickui#menu#install('&Packer', [
@@ -1030,6 +1075,7 @@ call quickui#menu#install('&Telescope', [
             \ [ "查看寄存器内容", 'Telescope registers' ],
             \ [ "查看按键映射", 'Telescope keymaps' ],
             \ [ "查看自动命令", 'Telescope autocommands' ],
+            \ [ "查看帮助文档", 'Telescope help_tags' ],
             \ [ "查看跳转记录", 'Telescope jumplist' ],
             \ [ "查看命令记录", 'Telescope command_history' ],
             \ [ "查看 Vim 选项配置", 'Telescope vim_options' ],
