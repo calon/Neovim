@@ -47,7 +47,7 @@ set list " 显示特殊字符
 set listchars=tab:>-,nbsp:.
 " set completeopt+=menuone,preview
 set completeopt=menu,menuone,preview
-set cc=76 "显示提示一定宽度的竖线
+set cc=80 "显示提示一定宽度的竖线
 hi NonText guifg=bg
 set title
 " autocmd BufEnter * let &titlestring = "neovim: " . expand("%:t")
