@@ -39,6 +39,14 @@ require("lazy").setup({
         priority = 1000,
     },
 
+    --历史文件
+    { "echasnovski/mini.visits",
+        version = "*",
+        config = function() 
+            require("mini.visits").setup()
+        end
+    },
+
     -- 补全
     { "neoclide/coc.nvim", branch = "release", },
     "skywind3000/vim-dict",
@@ -158,13 +166,14 @@ require("lazy").setup({
 
     -- 文本对象
     "coderifous/textobj-word-column.vim",
+    "wellle/targets.vim",
 
     -- 标签
     "liuchengxu/vista.vim",
 
     -- 窗口
     "calon/SimSoftWrap",
-    {"nvim-focus/focus.nvim",
+    { "nvim-focus/focus.nvim",
         version = "*",
         config = function() 
             require("focus").setup()
@@ -182,7 +191,15 @@ require("lazy").setup({
 
     -- 自定义彩色标记
     "jrosiek/vim-mark",
-    "bpstahlman/txtfmt"
+    "bpstahlman/txtfmt",
+
+    -- 首页
+    { "echasnovski/mini.starter",
+        version = "*",
+        config = function() 
+            require("mini.starter").setup()
+        end
+    },
 
     -- 浏览器协同
     -- "subnut/nvim-ghost.nvim",
