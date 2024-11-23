@@ -26,8 +26,8 @@ autocmd BufEnter * silent! lcd %:p:h "自动切换工作目录
 
 set termguicolors
 " set guifont="更纱黑体 Mono SC Nerd":h14
-set guifont=霞鹜文楷等宽:h20
-set guifontwide=霞鹜文楷等宽:h20
+set guifont=霞鹜文楷等宽:h11
+set guifontwide=霞鹜文楷等宽:h11
 set backupdir=c:\\Bak\\txt " 备份目录
 " set directory=c:\\Bak\\swap " 交换目录
 set undodir=c:\\Bak\\undo " 撤销文件目录
@@ -916,6 +916,14 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 " Vim-WordMotion "{{{2
 
 let g:wordmotion_spaces = ['。', '，', '！', '？', '：', '；', '”', '“', '‘', '’', '（', '）', '《', '》', '、', '…', '·', '—', '【', '】']
+
+" Vim-Remembers "{{{2
+
+let g:remembers_always_create = 1
+let g:remembers_always_reload = 1
+let g:remembers_ignore_empty_buffers = 1
+let g:remembers_tmp_dir = '~/remembers_tmp'
+let g:remembers_session_dir = '~/remembers_session'
 
 " VimWiki "{{{2
 

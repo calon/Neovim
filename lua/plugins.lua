@@ -97,6 +97,7 @@ require("lazy").setup({
 
     -- 文件和缓冲区操作
     "chrisbra/vim-autosave",
+    "psych3r/vim-remembers",
     "lambdalisue/fern.vim",
     "chimay/wheel",
     "lwflwf1/vim-session-manager",
