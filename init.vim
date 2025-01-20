@@ -26,8 +26,8 @@ autocmd BufEnter * silent! lcd %:p:h "自动切换工作目录
 
 set termguicolors
 " set guifont="更纱黑体 Mono SC Nerd":h14
-set guifont=霞鹜文楷等宽:h11
-set guifontwide=霞鹜文楷等宽:h11
+set guifont=霞鹜文楷等宽:h16
+set guifontwide=霞鹜文楷等宽:h16
 set backupdir=c:\\Bak\\txt " 备份目录
 " set directory=c:\\Bak\\swap " 交换目录
 set undodir=c:\\Bak\\undo " 撤销文件目录
@@ -317,9 +317,14 @@ inoremap <F3> <Esc>:call ToggleHLSearch()<CR>
 nnoremap <F4> a<C-R>=strftime("%Y-%m-%d")<CR><Esc>
 inoremap <F4> <C-R>=strftime("%Y-%m-%d")<CR>
 
+" 加密
+
+nnoremap <F5> <Plug>SecretToggle
+inoremap <F5> <Plug>SecretToggle
+
 " UndoTree 显示撤销历史
-nnoremap <F5> <Esc>:UndotreeToggle<CR>
-inoremap <F5> <Esc>:UndotreeToggle<CR>
+nnoremap <C-F5> <Esc>:UndotreeToggle<CR>
+inoremap <C-F5> <Esc>:UndotreeToggle<CR>
 
 set pastetoggle=<C-F5>
 
@@ -481,7 +486,7 @@ nnoremap <BackSpace><BackSpace> <C-U>
 nnoremap <Space> za
 set foldenable " 开始折叠
 set foldmethod=marker " 设置语法折叠
-setlocal foldlevel=1 " 设置折叠层数
+setlocal foldlevel=99 " 设置折叠层数
 set foldtext=CustomFoldText()
 set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
 
@@ -905,6 +910,11 @@ let g:txtfmtColor{8} = '^c\\%[yan]$,c:DarkCyan,g:#0AEFFF'
 " let g:txtfmtColor{6} = '^p\\%[ink]$,c:DarkMagenta,g:#FFB3FF'
 " let g:txtfmtColor{8} = '^w\\%[hite]$,c:White,g:#EEEEEE'
 
+" Vim_AnyFold "{{{2
+" autocmd Filetype * AnyFoldActivate
+" let g:anyfold_fold_comments=1
+" set foldlevel=99
+
 " Vim-Bookmark "{{{2
 let g:bookmark_sign = '>>'
 let g:bookmark_annotation_sign = '##'
@@ -916,6 +926,9 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 " Vim-WordMotion "{{{2
 
 let g:wordmotion_spaces = ['。', '，', '！', '？', '：', '；', '”', '“', '‘', '’', '（', '）', '《', '》', '、', '…', '·', '—', '【', '】']
+
+" Vim-qf "{{{2
+let g:qf_mapping_ack_style = 1
 
 " Vim-Remembers "{{{2
 

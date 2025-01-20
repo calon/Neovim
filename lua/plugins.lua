@@ -74,7 +74,7 @@ require("lazy").setup({
     -- "KabbAmine/lazyList.vim",
     "tomtom/tcomment_vim",
     "junegunn/vim-easy-align",
-    "Konfekt/FastFold",
+    -- "Konfekt/FastFold",
     "chrisgrieser/nvim-origami",
     "calon/escape_search",
     "vim-scripts/create_start_fold_marker.vim",
@@ -97,7 +97,7 @@ require("lazy").setup({
 
     -- 文件和缓冲区操作
     "chrisbra/vim-autosave",
-    "psych3r/vim-remembers",
+    -- "psych3r/vim-remembers",
     "lambdalisue/fern.vim",
     "chimay/wheel",
     "lwflwf1/vim-session-manager",
@@ -131,6 +131,8 @@ require("lazy").setup({
         end
     },
     -- "el-iot/buffer-tree",
+    -- 批量查找和替换
+    "brooth/far.vim",
 
     -- 配色和外观
     { "joshdick/onedark.vim",
@@ -157,6 +159,11 @@ require("lazy").setup({
     "ghifarit53/tokyonight-vim",
     "KeitaNakamura/neodark.vim",
     "junegunn/limelight.vim",
+    "sainnhe/gruvbox-material",
+    "sainnhe/edge",
+    "sainnhe/everforest",
+    "zootedb0t/citruszest.nvim",
+    "EdenEast/nightfox.nvim",
 
     "lilydjwg/colorizer",
     "calon/txt",
@@ -180,19 +187,34 @@ require("lazy").setup({
             require("focus").setup()
         end
     },
+    "romainl/vim-qf",
 
     --折叠
     -- "kevinhwang91/nvim-ufo",
+    -- "embear/vim-foldsearch",
+    -- "pseewald/vim-anyfold",
 
     -- 文件类型
     "aklt/plantuml-syntax",
     "wpug/vim-lang-html",
     "preservim/vim-markdown",
     "freitass/todo.txt-vim",
+    -- {
+    --     'MeanderingProgrammer/render-markdown.nvim',
+    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    --     dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    --     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    --     ---@module 'render-markdown'
+    --     ---@type render.md.UserConfig
+    --     opts = {},
+    -- },
 
     -- 自定义彩色标记
     "jrosiek/vim-mark",
     "bpstahlman/txtfmt",
+
+    -- 加密
+    "ernstwi/vim-secret",
 
     -- 首页
     { "echasnovski/mini.starter",
