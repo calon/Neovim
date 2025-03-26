@@ -40,12 +40,13 @@ require("lazy").setup({
     },
 
     --历史文件
-    { "echasnovski/mini.visits",
-        version = "*",
-        config = function() 
-            require("mini.visits").setup()
-        end
-    },
+    -- { "echasnovski/mini.visits",
+    --     version = "*",
+    --     config = function() 
+    --         require("mini.visits").setup()
+    --     end
+    -- },
+    "yegappan/mru",
 
     -- 补全
     { "neoclide/coc.nvim", branch = "release", },
@@ -82,6 +83,13 @@ require("lazy").setup({
     "tpope/vim-repeat",
     "vim-scripts/SearchComplete",
 
+    -- 辅助提示
+    -- {
+    -- "m4xshen/hardtime.nvim",
+    -- dependencies = { "MunifTanjim/nui.nvim" },
+    -- opts = {}
+    -- },
+
     -- 文本处理
     "dhruvasagar/vim-table-mode",
     "dkarter/bullets.vim",
@@ -97,6 +105,13 @@ require("lazy").setup({
 
     -- 文件和缓冲区操作
     "chrisbra/vim-autosave",
+    { "aidancz/buvvers.nvim",
+        config = function()
+            require("buvvers").setup()
+            vim.schedule(require("buvvers").open)
+        end
+    },
+
     -- "psych3r/vim-remembers",
     "lambdalisue/fern.vim",
     "chimay/wheel",
@@ -130,6 +145,20 @@ require("lazy").setup({
             require("telescope").load_extension("bookmarks")
         end
     },
+
+    {'romgrk/barbar.nvim',
+        dependencies = {
+        'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+        },
+        init = function() vim.g.barbar_auto_setup = false end,
+        opts = {
+        -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+        -- animation = true,
+        -- insert_at_start = true,
+        -- …etc.
+        },
+    },
+
     -- "el-iot/buffer-tree",
     -- 批量查找和替换
     "brooth/far.vim",
@@ -188,7 +217,7 @@ require("lazy").setup({
         end
     },
     "romainl/vim-qf",
-
+    
     --折叠
     -- "kevinhwang91/nvim-ufo",
     -- "embear/vim-foldsearch",
@@ -215,6 +244,9 @@ require("lazy").setup({
 
     -- 加密
     "ernstwi/vim-secret",
+
+    -- AI
+    -- "madox2/vim-ai",
 
     -- 首页
     { "echasnovski/mini.starter",

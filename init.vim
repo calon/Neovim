@@ -379,7 +379,7 @@ inoremap <A-F10> <Esc>:Bdelete<CR>
 " map <silent> <F12> :call BufferList()<CR>
 
 " BufferTabLine
-map <silent> <C-F12> :call ToggleBufTabLine()<CR>
+map <silent> <F12> :lua require("buvvers").toggle()<CR>
 
 function! ToggleBufTabLine()
      if (g:buftabline_show==0)
@@ -742,7 +742,7 @@ nnoremap <C-S-P> :lua MiniVisits.select_path()<CR>
 
 
 " MRU "{{{2
-" noremap <C-P> :MRU<CR>
+noremap <C-P> :MRU<CR>
 
 " Organ "{{{2
 " if ! exists("g:organ_loaded")
@@ -886,13 +886,13 @@ nnoremap <C-F> <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <Space>ff <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <A-F7> <cmd>Telescope live_grep<cr>
 nnoremap <Space>fg <cmd>Telescope live_grep<cr>
-nnoremap <F12> <cmd>Telescope buffers<cr>
+nnoremap <C-F12> <cmd>Telescope buffers<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
 nnoremap <Space>fb <cmd>Telescope buffers<cr>
 " nnoremap <leader>h <cmd>Telescope help_tags<cr>
 " nnoremap <Space>fh <cmd>Telescope help_tags<cr>
 nnoremap <A-P> <cmd>lua require('telescope.builtin').oldfiles()<cr>
-nnoremap <C-P> :Telescope oldfiles<CR>
+" nnoremap <C-P> :Telescope oldfiles<CR>
 " nnoremap <C-P> :Telescope frecency<CR>
 
 " Txtfmt "{{{2
@@ -909,6 +909,35 @@ let g:txtfmtColor{8} = '^c\\%[yan]$,c:DarkCyan,g:#0AEFFF'
 " let g:txtfmtColor{4} = '^t\\%[urquoise]$,c:DarkCyan,g:#0AEFFF'
 " let g:txtfmtColor{6} = '^p\\%[ink]$,c:DarkMagenta,g:#FFB3FF'
 " let g:txtfmtColor{8} = '^w\\%[hite]$,c:White,g:#EEEEEE'
+
+" Vim-AI "{{{2
+
+let g:vim_ai_chat = {
+\  "options": {
+\    "endpoint_url": "https://api.deepseek.com/chat/completions",
+\    "enable_auth": 1,
+\    "model": "deepseek-chat",
+\  },
+\}
+
+let g:vim_ai_complete = {
+\  "options": {
+\    "endpoint_url": "https://api.deepseek.com/chat/completions",
+\    "enable_auth": 1,
+\    "model": "deepseek-chat",
+\  },
+\}
+
+let g:vim_ai_edit = {
+\  "options": {
+\    "endpoint_url": "https://api.deepseek.com/chat/completions",
+\    "enable_auth": 1,
+\    "model": "deepseek-chat",
+\  },
+\}
+
+let g:vim_ai_token_file_path = '~/.config/deepseek.token'
+let g:vim_ai_roles_config_file = '~/.config/ai_roles.ini'
 
 " Vim_AnyFold "{{{2
 " autocmd Filetype * AnyFoldActivate
@@ -1042,6 +1071,7 @@ call quickui#menu#reset()
 
 call quickui#menu#install('&File', [
             \ [ "查看历史文件\tCtrl+P", '' ],
+            \ [ "查看历史文件\t:MRU", 'MRU' ],
             \ [ "加入收藏\t:FF", 'FF' ],
             \ [ "打开收藏\t:FE", 'FE' ],
             \ [ "打开缓冲区清单\t<F12>", 'Telescope buffers' ],
